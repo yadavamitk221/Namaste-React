@@ -1,4 +1,3 @@
-import './App.css';
 import GetWeekday from './components/getWeekDays';
 
 function App() {
