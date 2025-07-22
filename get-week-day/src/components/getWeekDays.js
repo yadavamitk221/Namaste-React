@@ -34,7 +34,7 @@ export default function GetWeekday() {
             <button data-testid="find-day-btn" onClick={showPopuAndGetDate}>
                 Find Day
             </button>
-            {sowDate && <p className="result">The date falls in {day}</p>}
+            { day ? sowDate && <p data-testid="result" className="result">The date falls in {day}</p> : "" }
         </div>
     );
 }
