@@ -29,7 +29,7 @@ function EvenOrOddChecker() {
       <input
         value={num}
         className="number-input"
-        type="text"
+        type="text"j
         placeholder="Enter a number"
         onChange={(e) => setNum(e.target.value)}
         data-testid="number-input"
