@@ -1,66 +1,73 @@
 import React, { useState } from "react";
+import './styles.css';
 
 function ChipsInput() {
+  const [chips, setChips] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [idCounter, setIdCounter] = useState(0);
 
-    const [chips, setChip] = useState([]);
-    const [inputValue, setInputValue] = useState("");
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value);
+  };
 
-    const addChip = (input) => {
-        let trimed = input.trim();
-        if (trimed) {
-            setChip(prev => [{ id: Date.now(), item: trimed }, ...prev]);
-        }
-        setInputValue("");
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter" && inputValue.trim() !== "") {
+      const newChip = {
+        id: idCounter,
+        label: inputValue.trim(),
+      };
+      setChips([...chips, newChip]);
+      setIdCounter(idCounter + 1);
+      setInputValue("");
     }
+  };
 
-    const deleteChip = (id) => {
-        setChip(prev => prev.filter(chip => chip.id !== id));
-    }
+  const handleDeleteChip = (idToDelete) => {
+    setChips(chips.filter((chip) => chip.id !== idToDelete));
+  };
 
-    return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "40px 0" }}>
-            <h2>Chips Input</h2>
-            <input
-                type="text"
-                value={inputValue}
-                placeholder="Type a chip and press tag"
-                style={{ padding: "8px", width: "200px" }}
-                onChange={(e => setInputValue(e.target.value))}
-                onKeyDown={(e) => e.key === "Enter" && addChip(e.target.value)}
-            />
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                {chips.map((c, id) => (
-                    <div
-                        key={id}
-                        style={{
-                            backgroundColor: "rgb(156 163 175)",
-                            margin: "4px",
-                            borderRadius: "50px",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            padding: "4px 12px",
-                            height: "30px",
-                        }}
-                    >
-                        <p style={{ margin: 0, fontSize: "14px" }}>{c.item}</p>
-                        <span
-                            onClick={() => deleteChip(c.id)}
-                            style={{
-                                color: "red",
-                                marginLeft: "10px",
-                                fontSize: "14px",
-                                cursor: "pointer",
-                            }}
-                        >
-                            X
-                        </span>
-                    </div>
-                ))}
-            </div>
-
-        </div >
-    );
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", margin: "40px 0" }}>
+      <h2>Chips Input</h2>
+      <input
+        type="text"
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleKeyPress}
+        placeholder="Type a chip and press tag"
+        style={{ padding: "8px", width: "200px" }}
+      />
+      <div style={{ margin: "20px", display: "flex", flexWrap: "wrap", alignItems: "center" }}>
+        {chips.map((chip) => (
+          <div
+            key={chip.id}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              margin: "5px",
+              backgroundColor: "lightgray",
+              borderRadius: "20px",
+              padding: "5px 10px",
+            }}
+          >
+            <span>{chip.label}</span>
+            <button
+              onClick={() => handleDeleteChip(chip.id)}
+              style={{
+                background: "transparent",
+                border: "none",
+                marginLeft: "8px",
+                cursor: "pointer",
+                color: "red",
+              }}
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default ChipsInput;
