@@ -1,27 +1,22 @@
-// class myCar{
-// constructor(name, modle){
-//    this.name = name, 
-//    this.modle = modle
-//    this.date = new Date();
-// }
-// }
+var pivotIndex = function (nums) {
+    let pivot = 0;
 
+    while (pivot < nums.length) {
+        let left = 0; let right = 0;
+        for (let i = 0; i < pivot; i++) {
+            left += nums[i];
+        }
+        for (let i = pivot + 1; i < nums.length; i++) {
+            right += nums[i];
+        }
+        if (left == right) {
+            return pivot;
+        }
+        pivot++;
+    }
+    return -1;
+};
 
-// myCar.prototype.getName = function(){
-//     return this.name;
-// }
+nums = [1, 2, 3];
 
-// myCar.prototype.getLaunchDate = function(){
-//     return this.date;
-// }
-
-
-// const prashantCar = myCar("volvo", "v02015");
-
-
-let newCar = {
-    name: "BMW",
-    price: 10000000
-}
-
-console.log("newCar", newCar)
+console.log(pivotIndex(nums));
