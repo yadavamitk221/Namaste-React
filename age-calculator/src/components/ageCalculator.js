@@ -18,10 +18,10 @@ function AgeCalculator() {
         if (days < 0){
             days += new Date(todaysDate.getFullYear(), todaysDate.getMonth(), 0).getDate();
             months--;
-        }
+        
         if (months < 0) {
             months += 12;
-            year--;
+            year--;}
         }
 
         setError(""); setAge({ year, months, days });
