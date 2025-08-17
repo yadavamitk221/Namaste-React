@@ -10,7 +10,7 @@ const ExpenseTracker = () => {
 
   const filteredTransactions = transactions.filter((t) =>
     t.title.toLowerCase().includes(search.toLowerCase())
-  );
+  );   
 
   const totalIncome = transactions
     .filter((t) => t.type === "income")
@@ -39,13 +39,13 @@ const ExpenseTracker = () => {
 
   const handleDelete = (id) => {
     const updated = transactions.filter((t) => t.id !== id);
+
     setTransactions(updated);
   };
 
   return (
     <div className="tracker-container">
       <h2>Expense Tracker</h2>
-
       <div className="header-container">
         <div className="balance">
           <h3 data-testid="balance-amount">Balance: ₹{balance}</h3>
