@@ -60,7 +60,7 @@ const ExpenseTracker = () => {
         </button>
       </div>
 
-      {showForm && (
+      {showForm && (  
         <div className="form">
           <input
             type="text"
